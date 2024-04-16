@@ -1,0 +1,64 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Titulo: {{ video.titulo }}</h1>
+
+   <p><strong>Autor:</strong> <a href="">{{ video.autor }}</a></p> <!-- enlace de detalle del autor aún no definido -->
+  <p><strong>Resumen:</strong> {{ video.resumen }}</p>
+  <p><strong>Genero:</strong> {% for genre in video.genero.all %} {{ genre }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+
+  <div style="margin-left:20px;margin-top:20px">
+    <h4>Copias</h4>
+
+    {% for copy in video.videoinstancia_set.all %}
+    <hr>
+    <p class="{% if copy.status == 'a' %}text-success{% elif copy.status == 'm' %}text-danger{% else %}text-warning{% endif %}">{{ copy.get_status_display }}</p>
+    {% if copy.status != 'a' %}<p><strong>Pendiente de devolución:</strong> {{copy.due_back}}</p>{% endif %}
+    <p><strong>Imprimir:</strong> {{copy.imprint}}</p>
+    <p class="text-muted"><strong>Id:</strong> {{copy.id}}</p>
+    {% endfor %}
+  </div>
+
+  {% load static %}
+
+  <video 
+    {% if video.titulo == 'Baile_Rogers_Jessica_Primaria' %}
+      width="640" height="480" controls><source src="{% static 'videos/Baile_Rogers_Jessica_Primaria.mp4' %}" type="video/mp4">    
+    {% endif %}
+
+    {% if video.titulo == 'Cumple_Jessica4' %}
+      width="640" height="480" controls><source src="{% static 'videos/Cumple_Jessica4.mp4' %}" type="video/mp4">    
+    {% endif %}
+
+    {% if video.titulo == 'Cumple_Quique_Jhonny_Peter_Tampico' %}
+      width="640" height="480" controls><source src="{% static 'videos/Cumple_Quique_Jhonny_Peter_Tampico.mp4' %}" type="video/mp4">    
+    {% endif %}
+
+    {% if video.titulo == 'Cumple_Quique7_Jhony4' %}
+      width="640" height="480" controls><source src="{% static 'videos/Cumple_Quique7_Jhony4.mp4' %}" type="video/mp4">    
+    {% endif %}
+
+    {% if video.titulo == 'Cumple_Tina_Casa_Tampico' %}
+      width="640" height="480" controls><source src="{% static 'videos/Cumple_Tina_Casa_Tampico.mp4' %}" type="video/mp4">    
+    {% endif %}
+
+    {% if video.titulo == 'Fiesta_Graduacion_Kinder_Jessica' %}
+      width="640" height="480" controls><source src="{% static 'videos/Fiesta_Graduacion_Kinder_Jessica.mp4' %}" type="video/mp4">    
+    {% endif %}
+
+    {% if video.titulo == 'Fin_Anio_Ebano_Casa_Tina' %}
+      width="640" height="480" controls><source src="{% static 'videos/Fin_Anio_Ebano_Casa_Tina.mp4' %}" type="video/mp4">    
+    {% endif %}
+
+    {% if video.titulo == 'Pastel_Cumple_jlglzd_Tampico' %}
+      width="640" height="480" controls><source src="{% static 'videos/Pastel_Cumple_jlglzd_Tampico.mp4' %}" type="video/mp4">    
+    {% endif %}
+
+    {% if video.titulo == 'Video_Siglo_XXI_Tsunami' %}
+      width="640" height="480" controls><source src="{% static 'videos/Video_Siglo_XXI_Tsunami.mp4' %}" type="video/mp4">    
+    {% endif %}
+  </video>
+
+
+{% endblock %}
+

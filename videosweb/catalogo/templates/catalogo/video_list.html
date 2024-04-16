@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Lista de videos</h1>
+
+    {% if video_list %}
+    <ul>
+
+      {% for video in video_list %}
+      <li>
+        <a href="{{ video.get_absolute_url }}">{{ video.titulo }}</a> ({{video.autor}})
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>No hay videos en la biblioteca.</p>
+    {% endif %}
+{% endblock %}
